@@ -1,13 +1,25 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { listDecks } from "../utils/api";
+import { listDecks, deleteDeck } from "../utils/api";
+import { useHistory } from "react-router-dom"
 
 function ListDecks() {
   const [decks, setDecks] = useState([]);
+  const [deckID, setDeckID] = useState("");
+  const history = useHistory();
 
   useEffect(() => {
     listDecks().then((data) => setDecks(data));
   }, []);
+
+  const deleteHandler = async () => {
+      console.log(deckID)
+    if(window.confirm("Are you sure you want to delete this deck?")){
+        await deleteDeck(deckID);
+        //history.go(0);
+        //resolve api issue and fix delete handler
+    }
+  }
 
   return (
       <div className="deck">
