@@ -17,7 +17,7 @@ function ListDecks() {
     if(window.confirm("Are you sure you want to delete this deck?")){
         await deleteDeck(deckID);
         //history.go(0);
-        //resolve api issue and fix delete handler
+        //fix delete handler
     }
   }
 
