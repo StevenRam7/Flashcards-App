@@ -1,10 +1,10 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { listDecks, deleteDeck } from "../utils/api";
+import { deleteDeck } from "../utils/api";
 import { useHistory, Link } from "react-router-dom";
 
 function ListDecks({ decks }) {
-  //const [decks, setDecks] = useState([]);
+  
   const [deckID, setDeckID] = useState("");
   const history = useHistory();
 
