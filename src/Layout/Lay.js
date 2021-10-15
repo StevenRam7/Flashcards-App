@@ -15,9 +15,12 @@ function Layout() {
   const [decks, setDecks] = useState([]);
 
   useEffect(() => {
-    listDecks().then((data) => setDecks(data));
+    listDecks()
+    .then((data) => setDecks(data));
   }, []);
+
 //GET "VIEW" TO RENDER PROPERLY
+console.log(decks);
   return (
     <div>
       <Header />

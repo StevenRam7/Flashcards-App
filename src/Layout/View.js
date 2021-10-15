@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import ListDecks from "./ListDecks";
+import { readDeck } from "../utils/api";
 
-//useEffect(() => {
-//    
-//})
+//use readDeck to load the deck info, add breadcrumb nav bar at top
 
 function View ({ decks }) {
     return (
