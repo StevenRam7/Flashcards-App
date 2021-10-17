@@ -8,10 +8,6 @@ function ListDecks({ decks }) {
   const [deckID, setDeckID] = useState("");
   const history = useHistory();
 
-  //useEffect(() => {
-  //  listDecks().then((data) => setDecks(data));
-  //}, []);
-
   const deleteHandler = async (deckID) => {
       setDeckID(deckID)
     if(window.confirm("Are you sure you want to delete this deck?")){
@@ -21,6 +17,8 @@ function ListDecks({ decks }) {
   }
 
   return (
+    <div>
+    <button type="button" class="btn btn-secondary"><span class="oi oi-plus">Create Deck</span></button>
       <div className="deck">
       {decks.map((deck) => {
 return (
@@ -36,6 +34,7 @@ return (
     </div>
   </div>
   )})}
+    </div>
     </div>
   )
     

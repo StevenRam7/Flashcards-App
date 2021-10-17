@@ -27,8 +27,7 @@ function Layout() {
       <Header />
       <div className="container">
         {/* TODO: Implement the screen starting here */}
-        <button type="button" class="btn btn-secondary"><span class="oi oi-plus">Create Deck</span></button>
-        <Switch>
+         <Switch>
           <Route exact path="/" component={() => <ListDecks decks={decks} />} />
           <Route exact path="/decks/:deckId" component={() => <View decks={decks} />} />
           <Route path="/decks/:deckId/cards/:cardId/edit" component={() => <Edit />} />
