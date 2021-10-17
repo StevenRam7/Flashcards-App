@@ -4,9 +4,11 @@ import { readDeck, deleteCard, deleteDeck } from "../utils/api";
 
 function View() {
   const [deck, setDeck] = useState({});
-  const [cardID, setCardID] = useState("");
   const { deckId } = useParams();
   const history = useHistory();
+  function loadDeck() {
+    readDeck(deckId).then(setDeck);
+  };
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -14,7 +16,7 @@ function View() {
     readDeck(deckId, abortController.signal).then((data) => setDeck(data));
   }, [deckId]);
 
-  const deleteDeck = async (deckID) => {
+  const deckDeleter = async (deckID) => {
     setDeck(deckID)
   if(window.confirm("Are you sure you want to delete this deck?")){
       await deleteDeck(deckID);
@@ -22,11 +24,14 @@ function View() {
     }
 }
 
-const deleteCard = async (cardId) => {
-  setCardID(cardId)
-if(window.confirm("Are you sure you want to delete this card?")){
-    await deleteCard(cardID);
-    //history.go(0);
+function cardDeleter(cardId) {
+  const confirmed = window.confirm(
+    "Delete this card?\n\nYou will not be able to recover it."
+  );
+  if (confirmed) {
+    console.log("Card Deleted", confirmed, cardId);
+    deleteCard(cardId)
+    loadDeck();
   }
 }
 
@@ -54,7 +59,7 @@ if(window.confirm("Are you sure you want to delete this card?")){
       <div className="button-row">
       <Link class="btn btn-secondary" to={`/decks/${deck.id}`}><span class="oi oi-eye">View</span></Link>
       <button class="btn btn-primary"><span class="oi oi-book">Study</span></button>
-      <button class="btn btn-danger" onClick={() => deleteDeck(deck.id)}><span class="oi oi-trash"></span></button>
+      <button class="btn btn-danger" onClick={() => deckDeleter(deck.id)}><span class="oi oi-trash"></span></button>
       </div>
     </div>
   </div>
@@ -63,7 +68,7 @@ if(window.confirm("Are you sure you want to delete this card?")){
         return (
           <div>
            
-            {/* cards with deck info - add deleteHandler for cards*/}
+            {/* cards with deck info*/}
             <div class="row">
               <div class="col-sm-6">
                 <div class="card">
@@ -78,13 +83,14 @@ if(window.confirm("Are you sure you want to delete this card?")){
                 <div class="card">
                   <div class="card-body">
                     <p class="card-text">{card.back}</p>
+                    {/*MAKE EDIT BUTTON FUNCTIONAL*/}
                     <Link
                       to={`/decks/${deckId}/cards/${card.id}/edit`}
                       class="btn btn-primary"
                     >
                       Edit
                     </Link>
-                    <button class="btn btn-danger" onClick={() => deleteCard(card.id)}><span class="oi oi-trash"></span></button>
+                    <button class="btn btn-danger" onClick={() => cardDeleter(card.id)}><span class="oi oi-trash"></span></button>
                   </div>
                 </div>
               </div>
