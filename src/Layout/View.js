@@ -57,8 +57,11 @@ function cardDeleter(cardId) {
       <h5 class="card-title">{deck.name}</h5>
       <p class="card-text">{deck.description}</p>
       <div className="button-row">
-      <Link class="btn btn-secondary" to={`/decks/${deck.id}`}><span class="oi oi-eye">View</span></Link>
-      <button class="btn btn-primary"><span class="oi oi-book">Study</span></button>
+      <Link class="btn btn-secondary" to={`/decks/${deck.id}`}>Edit</Link>
+      
+        <Link class="btn btn-primary" to={`/decks/${deck.id}/study`}><span class="oi oi-book">Study</span></Link>
+      
+      
       <button class="btn btn-danger" onClick={() => deckDeleter(deck.id)}><span class="oi oi-trash"></span></button>
       </div>
     </div>
@@ -86,7 +89,7 @@ function cardDeleter(cardId) {
                     {/*MAKE EDIT BUTTON FUNCTIONAL*/}
                     <Link
                       to={`/decks/${deckId}/cards/${card.id}/edit`}
-                      class="btn btn-primary"
+                      class="btn btn-secondary"
                     >
                       Edit
                     </Link>

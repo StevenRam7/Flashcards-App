@@ -7,6 +7,7 @@ import View from "./View";
 import { Switch, Route } from "react-router-dom";
 import { listDecks } from "../utils/api";
 import Edit from "./Edit";
+import Study from "./Study";
 //this file is "./src/Layout/index.js" in Qualified
 
 
@@ -20,8 +21,6 @@ function Layout() {
     .then((data) => setDecks(data));
   }, []);
 
-//GET "VIEW" TO RENDER PROPERLY
-//console.log(decks);
   return (
     <div>
       <Header />
@@ -31,6 +30,7 @@ function Layout() {
           <Route exact path="/" component={() => <ListDecks decks={decks} />} />
           <Route exact path="/decks/:deckId" component={() => <View decks={decks} />} />
           <Route path="/decks/:deckId/cards/:cardId/edit" component={() => <Edit />} />
+          <Route path="/decks/:deckId/study" component={() => <Study decks={decks} />} />
           
         <NotFound />
         </Switch>
