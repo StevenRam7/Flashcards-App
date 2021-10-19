@@ -4,11 +4,13 @@ import { Link, useParams } from "react-router-dom";
 
 function Study({ decks }) {
   const [deck, setDeck] = useState({});
+  const [cardNumber, setCardNumber] = useState("");
   const { deckId } = useParams();
   function loadDeck() {
     readDeck(deckId).then(setDeck);
   }
-  //loadDeck();
+  //const cardAmount = deck.cards.length;
+  const cards = deck.cards;
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -20,6 +22,8 @@ function Study({ decks }) {
         abortController.abort();
     }
 }, [deckId]);
+
+console.log(deck.cards, cards)
 
   return (
     <div class="study-screen">
@@ -38,8 +42,22 @@ function Study({ decks }) {
         </nav>
         <h1>Study: {deck.name}</h1>
       </div>
-    </div>
-  );
+        
+      {/*<div>      ~"cards" comes up as undefined~
+          {cards.map((card) => {
+              return(
+                  
+        setCardNumber(card.id),
+    <div>
+    <h5 class="card-title">Card {cardNumber} of {card.length} </h5>
+    <p class="card-text">Placeholder</p>
+    <button class="btn btn-primary">Flip</button>
+      </div>
+          )})}
+              </div>*/}
+              </div>
+    
+  )
 }
 
 export default Study;
