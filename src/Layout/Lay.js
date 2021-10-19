@@ -8,6 +8,7 @@ import { Switch, Route } from "react-router-dom";
 import { listDecks } from "../utils/api";
 import Edit from "./Edit";
 import Study from "./Study";
+import Create from "./Create";
 //this file is "./src/Layout/index.js" in Qualified
 
 
@@ -31,6 +32,7 @@ function Layout() {
           <Route exact path="/decks/:deckId" component={() => <View decks={decks} />} />
           <Route path="/decks/:deckId/cards/:cardId/edit" component={() => <Edit />} />
           <Route path="/decks/:deckId/study" component={() => <Study decks={decks} />} />
+          <Route path="/decks/new" component={() => <Create />} />
           
         <NotFound />
         </Switch>

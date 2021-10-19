@@ -18,7 +18,7 @@ function ListDecks({ decks }) {
 
   return (
     <div>
-    <button type="button" class="btn btn-secondary"><span class="oi oi-plus">Create Deck</span></button>
+    <Link class="btn btn-secondary" to="/decks/new"><span class="oi oi-plus">Create Deck</span></Link>
       <div className="deck">
       {decks.map((deck) => {
 return (
