@@ -4,11 +4,10 @@ import { Link, useParams } from "react-router-dom";
 
 function Study({ decks }) {
   const [deck, setDeck] = useState({});
-  const [cardNumber, setCardNumber] = useState("");
+  const [cardNumber, setCardNumber] = useState(0);
+  const [currentView, setCurrentView] = useState("front");
   const { deckId } = useParams();
-  function loadDeck() {
-    readDeck(deckId).then(setDeck);
-  }
+  
   //const cardAmount = deck.cards.length;
   const cards = deck.cards;
 
@@ -23,7 +22,21 @@ function Study({ decks }) {
     }
 }, [deckId]);
 
-console.log(deck.cards, cards)
+function flipHandler() {
+    if (currentView === "front") {
+        setCurrentView("back");
+    } 
+    if (currentView === "back") {
+        setCurrentView("front");
+    }
+}
+
+function nextHandler() {
+    setCardNumber(cardNumber + 1)
+    setCurrentView("front")
+}
+
+console.log(decks, cards)
 
   return (
     <div class="study-screen">
@@ -43,18 +56,21 @@ console.log(deck.cards, cards)
         <h1>Study: {deck.name}</h1>
       </div>
         
-      {/*<div>      ~"cards" comes up as undefined~
-          {cards.map((card) => {
+      <div>    
+          {deck.cards?.filter((card, index) => index === cardNumber).map((card) => {
               return(
                   
-        setCardNumber(card.id),
+        
     <div>
-    <h5 class="card-title">Card {cardNumber} of {card.length} </h5>
-    <p class="card-text">Placeholder</p>
-    <button class="btn btn-primary">Flip</button>
+    <h5 class="card-title">Card {cardNumber} of {deck.cards.length} </h5>
+    <p class="card-t">{currentView === "front" ? card.front : card.back}</p>
+    <button onClick={flipHandler} class="btn btn-primary">Flip</button>
+    {currentView === "back" &&
+        <button onClick={() => nextHandler()}>Next</button>}
+        {/*add restart and "not enough cards"*/}
       </div>
           )})}
-              </div>*/}
+              </div>
               </div>
     
   )

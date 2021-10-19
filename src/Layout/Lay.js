@@ -29,10 +29,11 @@ function Layout() {
         {/* TODO: Implement the screen starting here */}
          <Switch>
           <Route exact path="/" component={() => <ListDecks decks={decks} />} />
+          <Route exact path="/decks/new" component={() => <Create />} />
           <Route exact path="/decks/:deckId" component={() => <View decks={decks} />} />
           <Route path="/decks/:deckId/cards/:cardId/edit" component={() => <Edit />} />
           <Route path="/decks/:deckId/study" component={() => <Study decks={decks} />} />
-          <Route path="/decks/new" component={() => <Create />} />
+          
           
         <NotFound />
         </Switch>
