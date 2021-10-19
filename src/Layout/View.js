@@ -13,7 +13,12 @@ function View() {
   useEffect(() => {
     const abortController = new AbortController();
     if (!deckId) return;
-    readDeck(deckId, abortController.signal).then((data) => setDeck(data));
+    readDeck(deckId, abortController.signal)
+    .then((data) => setDeck(data));
+    return () => {
+      console.log("Cleanup view!");
+      abortController.abort();
+  }
   }, [deckId]);
 
   const deckDeleter = async (deckID) => {
@@ -35,7 +40,7 @@ function cardDeleter(cardId) {
   }
 }
 
-  console.log(deck, deckId);
+  //console.log(deck, deckId);
 
   return (
     <div className="deck-cards">

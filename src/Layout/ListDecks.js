@@ -28,7 +28,7 @@ return (
       <p class="card-text">{deck.description}</p>
       <div className="button-row">
       <Link class="btn btn-secondary" to={`/decks/${deck.id}`}><span class="oi oi-eye">View</span></Link>
-      <button class="btn btn-primary"><span class="oi oi-book">Study</span></button>
+      <Link class="btn btn-primary" to={`/decks/${deck.id}/study`}><span class="oi oi-book">Study</span></Link>
       <button class="btn btn-danger" onClick={() => deleteHandler(deck.id)}><span class="oi oi-trash"></span></button>
       </div>
     </div>
