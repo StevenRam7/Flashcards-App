@@ -3,12 +3,13 @@ import { readDeck } from "../utils/api";
 import { Link } from "react-router-dom";
 
 function Study({ decks }) {
-    
+
+    const [deck, setDeck] = useState({});
+    //get name to display properly
 
     return(
         <div class="study-screen">
-        {decks.map((deck) => {
-            {/*breadcrumb bar for navigation*/}
+        
       <div className="nav-bar">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
@@ -21,7 +22,7 @@ function Study({ decks }) {
           </ol>
         </nav>
       </div>
-})}
+
             
         </div>
     )
