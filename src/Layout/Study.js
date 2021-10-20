@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { readDeck } from "../utils/api";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 
 function Study({ decks }) {
   const [deck, setDeck] = useState({});
   const [cardNumber, setCardNumber] = useState(0);
   const [currentView, setCurrentView] = useState("front");
   const { deckId } = useParams();
+  const history = useHistory();
   
   //const cardAmount = deck.cards.length;
   const cards = deck.cards;
@@ -34,6 +35,11 @@ function flipHandler() {
 function nextHandler() {
     setCardNumber(cardNumber + 1)
     setCurrentView("front")
+    if (cardNumber + 1 === deck.cards.length) {
+        if(window.confirm("Restart cards?/n/Click 'cancel' to return to the homepage.")){
+            setCardNumber(0);
+          } else history.push("/");
+    }
 }
 
 console.log(decks, cards)
@@ -62,7 +68,7 @@ console.log(decks, cards)
                   
         
     <div>
-    <h5 class="card-title">Card {cardNumber} of {deck.cards.length} </h5>
+    <h5 class="card-title">Card {cardNumber + 1} of {deck.cards.length} </h5>
     <p class="card-t">{currentView === "front" ? card.front : card.back}</p>
     <button onClick={flipHandler} class="btn btn-primary">Flip</button>
     {currentView === "back" &&
