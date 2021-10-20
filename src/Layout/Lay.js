@@ -6,9 +6,10 @@ import ListDecks from "./ListDecks";
 import View from "./View";
 import { Switch, Route } from "react-router-dom";
 import { listDecks } from "../utils/api";
-import Edit from "./Edit";
+import EditCard from "./EditCard";
 import Study from "./Study";
 import Create from "./Create";
+import AddCard from "./AddCard";
 //this file is "./src/Layout/index.js" in Qualified
 
 
@@ -31,7 +32,8 @@ function Layout() {
           <Route exact path="/" component={() => <ListDecks decks={decks} />} />
           <Route exact path="/decks/new" component={() => <Create />} />
           <Route exact path="/decks/:deckId" component={() => <View decks={decks} />} />
-          <Route path="/decks/:deckId/cards/:cardId/edit" component={() => <Edit />} />
+          <Route exact path="/decks/:deckId/cards/new" component={() => <AddCard />} />
+          <Route path="/decks/:deckId/cards/:cardId/edit" component={() => <EditCard />} />
           <Route path="/decks/:deckId/study" component={() => <Study decks={decks} />} />
           
           
