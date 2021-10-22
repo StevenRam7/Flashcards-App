@@ -44,7 +44,7 @@ function Study({ decks }) {
 
   console.log(deck);
 
-  if (deck.cards.length < 3)
+  if (deck.cards?.length > 2)
   //deck is undefined
     return (
       <div class="study-screen">
@@ -102,8 +102,8 @@ function Study({ decks }) {
     </nav>
     <h1>Study: {deck.name}</h1>
     <h3>Not enough cards.</h3>
-    <p>You need at least 3 cards to study. There are {deck.cards.length} cards in this deck.</p>
-    <Link class="btn btn-primary"><span class="oi oi-plus">Add Cards</span></Link>
+    <p>You need at least 3 cards to study. There are {deck.cards?.length} cards in this deck.</p>
+    <Link to={`/decks/${deckId}/cards/new`} class="btn btn-primary"><span class="oi oi-plus">Add Cards</span></Link>
   </div>
   </div>
     )
