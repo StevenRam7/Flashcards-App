@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { readDeck } from "../utils/api";
 import { Link, useParams, useHistory } from "react-router-dom";
 
-function Study({ decks }) {
+function Study() {
   const [deck, setDeck] = useState({});
   const [cardNumber, setCardNumber] = useState(0);
   const [currentView, setCurrentView] = useState("front");
@@ -42,11 +42,8 @@ function Study({ decks }) {
     }
   }
 
-  console.log(deck);
-
   if (deck.cards?.length > 2)
-  //deck is undefined
-    return (
+     return (
       <div class="study-screen">
         {/*breadcrumb bar for navigation*/}
         <div className="nav-bar">

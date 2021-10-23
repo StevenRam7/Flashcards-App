@@ -12,8 +12,6 @@ import Create from "./Create";
 import AddCard from "./AddCard";
 //this file is "./src/Layout/index.js" in Qualified
 
-
-
 function Layout() {
 
   const [decks, setDecks] = useState([]);
@@ -27,14 +25,13 @@ function Layout() {
     <div>
       <Header />
       <div className="container">
-        {/* TODO: Implement the screen starting here */}
-         <Switch>
+        <Switch>
           <Route exact path="/" component={() => <ListDecks decks={decks} />} />
           <Route exact path="/decks/new" component={() => <Create />} />
-          <Route exact path="/decks/:deckId" component={() => <View decks={decks} />} />
+          <Route exact path="/decks/:deckId" component={() => <View />} />
           <Route exact path="/decks/:deckId/cards/new" component={() => <AddCard />} />
           <Route path="/decks/:deckId/cards/:cardId/edit" component={() => <EditCard />} />
-          <Route path="/decks/:deckId/study" component={() => <Study decks={decks} />} />
+          <Route path="/decks/:deckId/study" component={() => <Study />} />
           
           
         <NotFound />

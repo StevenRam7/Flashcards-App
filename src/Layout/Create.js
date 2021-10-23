@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { createDeck } from "../utils/api";
-import { Link, useParams, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function Create() {
   const history = useHistory();
@@ -31,13 +31,13 @@ function Create() {
       </div>
       <div class="forms">
         <form onSubmit={(e) => submitHandler(e)}>
-          <label htmlFor="name">
+          <label>
             Name
             <br />
             <input id="name" type="text" name="deckname" placeholder="Deck name" />
           </label>
           <br />
-          <label htmlFor="description">
+          <label>
             Description
             <br />
             <textarea

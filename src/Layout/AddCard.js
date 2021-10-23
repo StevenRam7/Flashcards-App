@@ -6,6 +6,7 @@ import { createCard } from "../utils/api";
 function AddCard() {
     const { deckId } = useParams();
     const [deck, setDeck] = useState({});
+    const [card, setCard] = useState({});
     const history = useHistory();
     
 
@@ -15,8 +16,10 @@ function AddCard() {
     //done button works, save button is non-responsive
     function submitHandler(event) {
         event.preventDefault();
-        console.log(event);
-       createCard(deckId, { front: event.target.front.value, back: event.target.back.value });
+        setCard({ front: event.target.front.value, back: event.target.back.value });
+        console.log(event, card);
+
+       createCard(deckId, card).then((data) => console.log(data));
     };
 
     useEffect(() => {
@@ -32,6 +35,7 @@ function AddCard() {
 
     return(
         <div class="add-card-screen">
+            {/*breadcrumb bar for navigation*/}
             <div class="nav-bar">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
@@ -49,8 +53,8 @@ function AddCard() {
       </div>
       <div class="forms">
           <h1>{deck.name}: Add Card</h1>
-          <form onSubmit={() => submitHandler(), console.log("Save")}>
-          <label>
+          <form onSubmit={(e) => submitHandler(e)}>
+        <label>
             Name
             <br />
             <textarea id="front" type="text" name="front" placeholder="Front side of card" />

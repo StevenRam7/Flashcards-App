@@ -4,6 +4,7 @@ import { readDeck, deleteCard, deleteDeck } from "../utils/api";
 
 function View() {
   const [deck, setDeck] = useState({});
+  const [markDelete, setMarkDelete] = useState("N");
   const { deckId } = useParams();
   const history = useHistory();
   function loadDeck() {
@@ -12,8 +13,9 @@ function View() {
 
   useEffect(() => {
     const abortController = new AbortController();
-    if (!deckId) return;
+    if (!deckId && markDelete === "N") return
     readDeck(deckId, abortController.signal)
+    //crashes after deleting deck because of readDeck
     .then((data) => setDeck(data));
     return () => {
       console.log("Cleanup view!");
@@ -21,12 +23,18 @@ function View() {
   }
   }, [deckId]);
 
-  const deckDeleter = async (deckID) => {
-    setDeck(deckID)
+  async function deckDeleter(deckID) {
+    try{
+      setDeck(deckID)
   if(window.confirm("Are you sure you want to delete this deck?")){
       await deleteDeck(deckID);
-      history.go(0);
+      history.go("/");
     }
+    }
+     catch(error) {
+      return (error)
+    }
+    setMarkDelete("Y");
 }
 
 function cardDeleter(cardId) {
@@ -39,8 +47,7 @@ function cardDeleter(cardId) {
     loadDeck();
   }
 }
-
-  //console.log(deck, deckId);
+console.log(markDelete)
 
   return (
     <div className="deck-cards">
@@ -91,7 +98,6 @@ function cardDeleter(cardId) {
                 <div class="card">
                   <div class="card-body">
                     <p class="card-text">{card.back}</p>
-                    {/*MAKE EDIT BUTTON FUNCTIONAL*/}
                     <Link
                       to={`/decks/${deckId}/cards/${card.id}/edit`}
                       class="btn btn-secondary"
