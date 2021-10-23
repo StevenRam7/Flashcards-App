@@ -105,6 +105,7 @@ console.log(markDelete)
                       Edit
                     </Link>
                     <button class="btn btn-danger" onClick={() => cardDeleter(card.id)}><span class="oi oi-trash"></span></button>
+                    {/*doesn't reload page upon deleting card*/}
                   </div>
                 </div>
               </div>

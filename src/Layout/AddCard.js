@@ -13,14 +13,16 @@ function AddCard() {
     function doneHandler(event) {
         history.push(`/decks/${deckId}`)
     };
-    //done button works, save button is non-responsive
+    
     function submitHandler(event) {
         event.preventDefault();
-        setCard({ front: event.target.front.value, back: event.target.back.value });
-        console.log(event, card);
-
-       createCard(deckId, card).then((data) => console.log(data));
-    };
+        const abortController = new AbortController();
+        setCard({ front: event.target.cardfront.value, back: event.target.cardback.value });
+        console.log(event.target.cardfront.value);
+        createCard(deckId, card, abortController.signal)
+       .then((data) => history.push(`/decks/${deckId}`))
+       //cards are created without front/back text
+    }
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -32,6 +34,8 @@ function AddCard() {
           abortController.abort();
       }
       }, [deckId]);
+
+      console.log(card)
 
     return(
         <div class="add-card-screen">
@@ -55,27 +59,28 @@ function AddCard() {
           <h1>{deck.name}: Add Card</h1>
           <form onSubmit={(e) => submitHandler(e)}>
         <label>
-            Name
+            Front
             <br />
-            <textarea id="front" type="text" name="front" placeholder="Front side of card" />
+            <textarea id="front" type="text" name="cardfront" placeholder="Front side of card" />
             </label>
           
           <br />
           <label>
-            Description
+            Back
             <br />
             <textarea
               id="back"
               type="text"
-              name="back"
+              name="cardback"
               placeholder="Back side of card"
             />
           </label>
-          </form>
           <div class="buttons">
             <button type="button" onClick={() => doneHandler()}>Done</button>
             <button type="submit">Save</button>
           </div>
+          </form>
+          
       </div>
         </div>
     )
