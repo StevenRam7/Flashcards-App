@@ -11,7 +11,6 @@ import Study from "./Study";
 import Create from "./Create";
 import AddCard from "./AddCard";
 import EditDeck from "./EditDeck";
-//this file is "./src/Layout/index.js" in Qualified
 
 function Layout() {
 

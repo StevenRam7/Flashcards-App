@@ -4,7 +4,7 @@ import { readDeck, deleteCard, deleteDeck } from "../utils/api";
 
 function View() {
   const [deck, setDeck] = useState({});
-  const [markDelete, setMarkDelete] = useState("N");
+  const [markDelete, setMarkDelete] = useState("");
   const { deckId } = useParams();
   const history = useHistory();
   function loadDeck() {
@@ -13,28 +13,27 @@ function View() {
 
   useEffect(() => {
     const abortController = new AbortController();
-    if (!deckId && markDelete === "N") return
+    if (!deckId && !markDelete) return
     readDeck(deckId, abortController.signal)
-    //crashes after deleting deck because of readDeck
     .then((data) => setDeck(data));
     return () => {
       console.log("Cleanup view!");
       abortController.abort();
   }
-  }, [deckId]);
+  }, []);
 
-  async function deckDeleter(deckID) {
+  async function deckDeleter(id) {
     try{
-      setDeck(deckID)
+      setDeck(id)
   if(window.confirm("Are you sure you want to delete this deck?")){
-      await deleteDeck(deckID);
-      history.go("/");
+      await deleteDeck(id);
+      history.push("/");
     }
     }
-     catch(error) {
+    catch(error) {
       return (error)
     }
-    setMarkDelete("Y");
+    setMarkDelete(true);
 }
 
 function cardDeleter(cardId) {

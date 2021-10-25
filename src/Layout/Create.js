@@ -11,7 +11,6 @@ function Create() {
 
   function submitHandler(event) {
     event.preventDefault();
-    console.log(event.target.description)
     createDeck({ description: event.target.description.value, name: event.target.deckname.value })
     .then((data) => history.push(`/decks/${data.id}`))
   }

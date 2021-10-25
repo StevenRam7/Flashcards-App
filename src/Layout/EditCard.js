@@ -52,8 +52,6 @@ function EditCard() {
     };
   }, [cardId]);
 
-  console.log(card);
-
   return (
     <div class="editcard-screen">
       {/*breadcrumb bar for navigation*/}
