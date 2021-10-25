@@ -12,11 +12,15 @@ function EditCard() {
   };
 
   function submitHandler(event) {
-
+    event.preventDefault();
+    const abortController = new AbortController();
+    updateCard({ front: event.target.cardfront.value, back: event.target.cardback.value }, abortController.signal)
+    .then((data) => history.push(`/decks/${deckId}`))
+    //unhandled promise
   }
 
   function cancelHandler() {
-      
+
   }
 
   useEffect(() => {
@@ -66,7 +70,7 @@ function EditCard() {
         <label>
             Front
             <br />
-            <textarea id="front" type="text" name="front" value={card.front} />
+            <textarea id="front" type="text" name="cardfront" value={card.front} />
             </label>
           
           <br />
@@ -76,7 +80,7 @@ function EditCard() {
             <textarea
               id="back"
               type="text"
-              name="back"
+              name="cardback"
               value={card.back}
             />
           </label>
