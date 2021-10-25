@@ -47,7 +47,6 @@ function cardDeleter(cardId) {
     loadDeck();
   }
 }
-console.log(markDelete)
 
   return (
     <div className="deck-cards">
@@ -69,7 +68,7 @@ console.log(markDelete)
       <h5 class="card-title">{deck.name}</h5>
       <p class="card-text">{deck.description}</p>
       <div className="button-row">
-      <Link class="btn btn-secondary" to={`/decks/${deck.id}`}>Edit</Link>
+      <Link class="btn btn-secondary" to={`/decks/${deck.id}/edit`}>Edit</Link>
       
         <Link class="btn btn-primary" to={`/decks/${deck.id}/study`}><span class="oi oi-book">Study</span></Link>
       
@@ -105,8 +104,7 @@ console.log(markDelete)
                       Edit
                     </Link>
                     <button class="btn btn-danger" onClick={() => cardDeleter(card.id)}><span class="oi oi-trash"></span></button>
-                    {/*doesn't reload page upon deleting card*/}
-                  </div>
+                    </div>
                 </div>
               </div>
             </div>

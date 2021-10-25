@@ -10,6 +10,7 @@ import EditCard from "./EditCard";
 import Study from "./Study";
 import Create from "./Create";
 import AddCard from "./AddCard";
+import EditDeck from "./EditDeck";
 //this file is "./src/Layout/index.js" in Qualified
 
 function Layout() {
@@ -29,9 +30,10 @@ function Layout() {
           <Route exact path="/" component={() => <ListDecks decks={decks} />} />
           <Route exact path="/decks/new" component={() => <Create />} />
           <Route exact path="/decks/:deckId" component={() => <View />} />
+          <Route exact path="/decks/:deckId/study" component={() => <Study />} />
+          <Route exact path="/decks/:deckId/edit" component={() => <EditDeck />} />
           <Route exact path="/decks/:deckId/cards/new" component={() => <AddCard />} />
           <Route exact path="/decks/:deckId/cards/:cardId/edit" component={() => <EditCard />} />
-          <Route path="/decks/:deckId/study" component={() => <Study />} />
           
           
         <NotFound />

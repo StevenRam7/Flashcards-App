@@ -7,9 +7,7 @@ function EditCard() {
   const [card, setCard] = useState({});
   const { deckId, cardId } = useParams();
   const history = useHistory();
-  function loadDeck() {
-    readDeck(deckId).then(setDeck);
-  }
+  
 
   function changeHandler({ target: { name, value } }) {
     setCard(() => ({

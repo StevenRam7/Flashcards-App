@@ -1,28 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams, useHistory } from "react-router-dom";
-import { readDeck } from "../utils/api";
-import { createCard } from "../utils/api";
+import { Link, useHistory, useParams } from "react-router-dom";
+import { readDeck, updateDeck } from "../utils/api";
 
-function AddCard() {
-  const { deckId } = useParams();
+function EditDeck() {
   const [deck, setDeck] = useState({});
+  const { deckId } = useParams();
   const history = useHistory();
-
-  function doneHandler(event) {
-    history.push(`/decks/${deckId}`);
-  }
 
   function submitHandler(event) {
     event.preventDefault();
     const abortController = new AbortController();
-    console.log(event.target.cardfront.value);
-    createCard(deckId, {
-        front: event.target.cardfront.value,
-        back: event.target.cardback.value,
-        deckId: deckId,
-      },
-      abortController.signal).then((data) => history.push(`/decks/${deckId}`));
-    
+    updateDeck(
+      {
+        name: event.target.name.value,
+        description: event.target.description.value,
+        id: deckId
+    },
+      abortController.signal
+    ).then((data) => history.push(`/decks/${data.id}`));
+  }
+
+  function cancelHandler() {
+    history.push(`/decks/${deckId}`);
+  }
+
+  function changeHandler({ target: { name, value } }) {
+    setDeck(() => ({
+      [name]: value,
+    }));
   }
 
   useEffect(() => {
@@ -30,13 +35,15 @@ function AddCard() {
     if (!deckId) return;
     readDeck(deckId, abortController.signal).then((data) => setDeck(data));
     return () => {
-      console.log("Cleanup AddCard!");
+      console.log("Cleanup EditDeck!");
       abortController.abort();
     };
   }, [deckId]);
 
+  console.log(deckId)
+
   return (
-    <div class="add-card-screen">
+    <div class="editdeck-screen">
       {/*breadcrumb bar for navigation*/}
       <div class="nav-bar">
         <nav aria-label="breadcrumb">
@@ -48,41 +55,43 @@ function AddCard() {
               <Link to={`/decks/${deckId}`}>{deck.name}</Link>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
-              Add Cards
+              Edit Deck
             </li>
           </ol>
         </nav>
       </div>
       <div class="forms">
-        <h1>{deck.name}: Add Card</h1>
+        <h1>Edit Deck</h1>
         <form onSubmit={(e) => submitHandler(e)}>
           <label>
-            Front
+            Name
             <br />
             <textarea
-              id="cardfront"
+              id="name"
               type="text"
-              name="cardfront"
-              placeholder="Front side of card"
+              name="name"
+              value={deck.name}
+              onChange={changeHandler}
             />
           </label>
 
           <br />
           <label>
-            Back
+            Description
             <br />
             <textarea
-              id="cardback"
+              id="description"
               type="text"
-              name="cardback"
-              placeholder="Back side of card"
+              name="description"
+              value={deck.description}
+              onChange={changeHandler}
             />
           </label>
           <div class="buttons">
-            <button type="button" onClick={() => doneHandler()}>
-              Done
+            <button type="button" onClick={() => cancelHandler()}>
+              Cancel
             </button>
-            <button type="submit">Save</button>
+            <button type="submit">Submit</button>
           </div>
         </form>
       </div>
@@ -90,4 +99,4 @@ function AddCard() {
   );
 }
 
-export default AddCard;
+export default EditDeck;
