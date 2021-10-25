@@ -58,8 +58,46 @@
       "id": 5
     },
     {
+      "front": "XYZ",
+      "back": "ABC",
       "deckId": 2,
       "id": 6
+    },
+    {
+      "front": "22",
+      "back": "33",
+      "deckId": 6,
+      "id": 7
+    },
+    {
+      "front": "12",
+      "back": "23",
+      "deckId": 7,
+      "id": 8
+    },
+    {
+      "front": "xx",
+      "back": "zz",
+      "deckId": 7,
+      "id": 10
+    },
+    {
+      "front": "xcv",
+      "back": "sdf",
+      "deckId": 7,
+      "id": 11
+    },
+    {
+      "front": "xx",
+      "back": "ss",
+      "deckId": 6,
+      "id": 13
+    },
+    {
+      "front": "tytyty",
+      "back": "ghghgh",
+      "deckId": 6,
+      "id": 14
     }
   ]
 }

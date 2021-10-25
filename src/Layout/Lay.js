@@ -30,7 +30,7 @@ function Layout() {
           <Route exact path="/decks/new" component={() => <Create />} />
           <Route exact path="/decks/:deckId" component={() => <View />} />
           <Route exact path="/decks/:deckId/cards/new" component={() => <AddCard />} />
-          <Route path="/decks/:deckId/cards/:cardId/edit" component={() => <EditCard />} />
+          <Route exact path="/decks/:deckId/cards/:cardId/edit" component={() => <EditCard />} />
           <Route path="/decks/:deckId/study" component={() => <Study />} />
           
           
