@@ -27,7 +27,7 @@ function ListDecks({ decks }) {
               <div class="card-body">
                 <div className="d-flex w-100 justify-content-between">
                   <h5 class="card-title">{deck.name}</h5>
-                  <small>{deck.cards.length} cards</small>
+                  <small>{deck.cards.length} {deck.cards.length === 1 ? "card" : "cards"}</small>
                 </div>
                 <p class="card-text">{deck.description}</p>
                 <div className="button-row">
