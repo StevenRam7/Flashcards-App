@@ -43,7 +43,7 @@ function Study() {
   }
 
   if (deck.cards?.length > 2)
-     return (
+    return (
       <div class="study-screen">
         {/*breadcrumb bar for navigation*/}
         <div className="nav-bar">
@@ -62,7 +62,9 @@ function Study() {
         </div>
 
         <div>
-          {deck.cards?.filter((card, index) => index === cardNumber).map((card) => {
+          {deck.cards
+            ?.filter((card, index) => index === cardNumber)
+            .map((card) => {
               return (
                 <div>
                   <h5 class="card-title">
@@ -82,28 +84,35 @@ function Study() {
             })}
         </div>
       </div>
-    ); else return(
-        <div class="not-enough-screen">
+    );
+  else
+    return (
+      <div class="not-enough-screen">
         {/*breadcrumb bar for navigation*/}
         <div className="nav-bar">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
-        <Link to="/">Home</Link>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">
-          <Link to={`/decks/${deckId}`}>{deck.name}</Link>
-        </li>
-        <li class="breadcrumb-item">Study</li>
-      </ol>
-    </nav>
-    <h1>Study: {deck.name}</h1>
-    <h3>Not enough cards.</h3>
-    <p>You need at least 3 cards to study. There are {deck.cards?.length} cards in this deck.</p>
-    <Link to={`/decks/${deckId}/cards/new`} class="btn btn-primary"><span class="oi oi-plus">Add Cards</span></Link>
-  </div>
-  </div>
-    )
+                <Link to="/">Home</Link>
+              </li>
+              <li class="breadcrumb-item active" aria-current="page">
+                <Link to={`/decks/${deckId}`}>{deck.name}</Link>
+              </li>
+              <li class="breadcrumb-item">Study</li>
+            </ol>
+          </nav>
+          <h1>Study: {deck.name}</h1>
+          <h3>Not enough cards.</h3>
+          <p>
+            You need at least 3 cards to study. There are {deck.cards?.length}{" "}
+            cards in this deck.
+          </p>
+          <Link to={`/decks/${deckId}/cards/new`} class="btn btn-primary">
+            <span class="oi oi-plus">Add Cards</span>
+          </Link>
+        </div>
+      </div>
+    );
 }
 
 export default Study;

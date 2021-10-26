@@ -48,7 +48,7 @@ function AddCard() {
               <Link to={`/decks/${deckId}`}>{deck.name}</Link>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
-              Add Cards
+              Add Card
             </li>
           </ol>
         </nav>

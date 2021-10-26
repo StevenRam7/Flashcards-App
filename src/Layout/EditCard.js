@@ -7,7 +7,6 @@ function EditCard() {
   const [card, setCard] = useState({});
   const { deckId, cardId } = useParams();
   const history = useHistory();
-  
 
   function changeHandler({ target: { name, value } }) {
     setCard(() => ({
@@ -85,7 +84,7 @@ function EditCard() {
               onChange={changeHandler}
             />
           </label>
-          
+
           <br />
           <label>
             Back
