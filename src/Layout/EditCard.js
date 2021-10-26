@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { readCard, readDeck, updateCard } from "../utils/api";
+import CardForm from "./CardForms/CardForm";
 
 function EditCard() {
   const [deck, setDeck] = useState({});
   const [card, setCard] = useState({});
+  const [buttonText1, setButtonText1] = useState("Cancel");
+  const [buttonText2, setButtonText2] = useState("Submit");
   const { deckId, cardId } = useParams();
   const history = useHistory();
 
@@ -71,40 +74,7 @@ function EditCard() {
       </div>
       <div class="forms">
         <h1>Edit Card</h1>
-        <form onSubmit={(e) => submitHandler(e)}>
-          <label>
-            Front
-            <br />
-            <textarea
-              id="cardfront"
-              type="text"
-              name="cardfront"
-              placeholder="Front side of card"
-              value={card.front}
-              onChange={changeHandler}
-            />
-          </label>
-
-          <br />
-          <label>
-            Back
-            <br />
-            <textarea
-              id="cardback"
-              type="text"
-              name="cardback"
-              placeholder="Back side of card"
-              value={card.back}
-              onChange={changeHandler}
-            />
-          </label>
-          <div class="buttons">
-            <button type="button" onClick={() => cancelHandler()}>
-              Cancel
-            </button>
-            <button type="submit">Submit</button>
-          </div>
-        </form>
+        <CardForm submitHandler={submitHandler} doneHandler={cancelHandler} deck={deck} buttonText1={buttonText1} buttonText2={buttonText2} card={card} changeHandler={changeHandler}/>
       </div>
     </div>
   );

@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import { readDeck } from "../utils/api";
 import { createCard } from "../utils/api";
+import CardForm from "./CardForms/CardForm";
 
 function AddCard() {
   const { deckId } = useParams();
   const [deck, setDeck] = useState({});
+  const [buttonText1, setButtonText1] = useState("Done");
+  const [buttonText2, setButtonText2] = useState("Save");
   const history = useHistory();
 
   function doneHandler(event) {
@@ -53,38 +56,9 @@ function AddCard() {
           </ol>
         </nav>
       </div>
-      <div class="forms">
-        <h1>{deck.name}: Add Card</h1>
-        <form onSubmit={(e) => submitHandler(e)}>
-          <label>
-            Front
-            <br />
-            <textarea
-              id="cardfront"
-              type="text"
-              name="cardfront"
-              placeholder="Front side of card"
-            />
-          </label>
-
-          <br />
-          <label>
-            Back
-            <br />
-            <textarea
-              id="cardback"
-              type="text"
-              name="cardback"
-              placeholder="Back side of card"
-            />
-          </label>
-          <div class="buttons">
-            <button type="button" onClick={() => doneHandler()}>
-              Done
-            </button>
-            <button type="submit">Save</button>
-          </div>
-        </form>
+      <div>
+        <h1>Add Card</h1>
+        <CardForm submitHandler={submitHandler} doneHandler={doneHandler} deck={deck} buttonText1={buttonText1} buttonText2={buttonText2} />
       </div>
     </div>
   );
